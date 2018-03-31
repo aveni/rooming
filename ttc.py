@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class Market:
 	def __init__(self, name, ordered_students, rooms):
 		self.name = name
@@ -21,7 +20,7 @@ class Market:
 				if s.endowment in occupied:
 					print ">1 student in %s's room!" % s.name
 					return False
-				if s.endowment not in rooms:
+				if s.endowment not in self.rooms:
 					print "%s's endowment not a valid room!" % s.name
 					return False
 				if s.endowment not in s.prefs:
@@ -126,44 +125,3 @@ class Student:
 
 	def is_IR(self, room):
 		return (self.endowment is None) or self.prefs.index(room) <= self.prefs.index(self.endowment)
-
-
-## Setup the market
-rooms = [
-"141H",
-"133A",
-"151B",
-"122C",
-"101A"
-]
-
-abhi = Student("Abhi", "141H", ["133A","122C","141H"])
-pat = Student("Pat", "133A", ["151B","133A"])
-bgu = Student("Bgu", "151B", ["133A", "141H", "151B"])
-mich = Student("Michael", "122C", ["101A","122C"])
-phil = Student("Phil", None, ["141H"])
-
-priority = [abhi, mich, bgu, pat, phil]
-
-m = Market("Burton 1", priority, rooms)
-
-
-## Validate and fill in prefs for newcomers
-print "MARKET VALID?\n%s\n" % m.is_valid()
-m.fill_prefs()
-print m
-
-
-## Run YRMH-IGYT
-allocation, log = m.yrmh_igyt()
-
-
-## Print results
-print '{:10s} {:s}\t\t>=\t{:s}'.format("STUDENT", "NEW", "ORIGINAL")
-print "----------------------------------"
-for student in allocation:
-	print '{:10s} {:s}\t\t>=\t{:s}'.format(student.name, allocation[student], student.endowment)
-
-print "\nINCENTIVE-COMPATIBLE?\n%s\n" % m.is_IR(allocation)
-
-print "LOG\n------------------------------------\n%s" % log
