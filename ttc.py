@@ -61,7 +61,7 @@ class Market:
 				return False
 		return True
 
-	def ityr_ygmt(self):
+	def yrmh_igyt(self):
 		allocation = {}
 		priority = self.students
 		temp = []
@@ -154,8 +154,8 @@ m.fill_prefs()
 print m
 
 
-## Run ITYR-YGMT
-allocation, log = m.ityr_ygmt()
+## Run YRMH-IGYT
+allocation, log = m.yrmh_igyt()
 
 
 ## Print results
