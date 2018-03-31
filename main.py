@@ -51,7 +51,7 @@ allocation, log = m.yrmh_igyt()
 ## Print results
 print '{:10s} {:s}\t\t>=\t{:s}'.format("STUDENT", "NEW", "ORIGINAL")
 print "----------------------------------"
-for student in allocation:
+for student in priority:
 	print '{:10s} {:s}\t\t>=\t{:s}'.format(student.name, allocation[student], student.endowment)
 
 print "\nINCENTIVE-COMPATIBLE?\n%s\n" % m.is_IR(allocation)
